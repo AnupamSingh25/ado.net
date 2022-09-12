@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+@using System.Data;
+@model WebApplication5.Models.Prop
+<div class="container-fluid">
+    <div class="row justify-content-evenly">
+        <div class="col-lg-6">
+            <h2 class="text-danger">Register</h2>
+            <form>
+                <input type="hidden" id="ids" />
+                Name : <input type="text" id="Name" name="Name" class="form-control" />
+                Email : <input type="Email" name="Email" id="Email" class="form-control" />
+                Password : <input type="password" name="Pass" id="Pass" class="form-control" />
+                Dob : <input type="date" name="Dob" id="Dob" class="form-control" />
+                Contect : <input type="number" name="Contect" id="Contect" class="form-control" />
+                gender : <br /><input type="radio" name="gender" value="male" />male
+                <input type="radio" name="gender" value="female" />female<br />
+                upload Pic : <input type="file" id="Picf" name="Picf" class="form-control" onchange="readfile()" />
+                <img src="~/Content/pic/no-img.jpg" height="100px" width="100px" id="img" />
+                <input type="button" id="btnsave" onclick="fatch()" value="submit" class="btn btn-outline-danger" />
+                <input type="button" id="btnsave1" onclick="update1()" value="update" class="btn btn-outline-danger" />
+            </form>
+        </div>
+        <div class="col-lg-6" id="div">
+            <h2 class="text-danger text-center">Register Table</h2>
+            <table class="table table-bordered table-responsive-sm" id="div1">
+                <tr>
+                    <th>sno</th>
+                    <th>name</th>
+                    <th>email</th>
+                    <th>password</th>
+                    <th>contact</th>
+                    <th>Gender</th>
+                    <th>pic</th>
+                    <th>dob</th>
+                    <th>stutas</th>
+                    <th>action</th>
+                    <th>update</th>
+                    
+                </tr>
+               @if(Model.dt!=null && Model.dt.Rows.Count > 0)
+                {
+                    foreach (DataRow item in Model.dt.Rows)
+                    {
+            <tr>
+                <td>@item["id"]</td>
+                <td>@item["name"]</td>
+                <td>@item["email"]</td>
+                <td>@item["pass"]</td>
+                <td>@item["contact"]</td>
+                <td>@item["gender"]</td>
+                <td>@item["pic"]</td>
+                <td>@item["dob"]</td>
+                <td>@item["stutas"]</td>
+                <td><span onclick="del(@item["id"])" class="text-danger">Delete</span></td>
+                <td><span onclick="update(@item["id"])" class="text-danger">update</span></td>
+
+            </tr>
+                    }
+                }
+            
+            </table>
+        </div>
+    </div>
+</div>
